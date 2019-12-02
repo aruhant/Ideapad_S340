@@ -51,7 +51,7 @@
 					<key>Comment</key>
 					<string>change _OSI to XOSI</string>
 					<key>Disabled</key>
-					<true/>
+					<false/>
 					<key>Find</key>
 					<data>X09TSQ==</data>
 					<key>Replace</key>
