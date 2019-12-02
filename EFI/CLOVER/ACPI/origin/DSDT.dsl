@@ -1,7 +1,4 @@
-//Firmware Error (ACPI): Failure looking up [^^GFX0.CLID], AE_NOT_FOUND (20180427/dswload-498)
-// Invalid external declaration at AML offset 0x154f (see bz1397).
-//Firmware Error (ACPI): Failure looking up [^^GFX0.CLID], AE_NOT_FOUND (20180427/dswload2-468)
-// Invalid external declaration at AML offset 0x154f (see bz1397).
+// Invalid external declaration at AML offset 0x1568 (see bz1397).
 /*
  * Intel ACPI Component Architecture
  * AML/ASL+ Disassembler version 20180427 (64-bit version)(RM)
@@ -9,13 +6,13 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of DSDT.aml, Sun Dec  1 01:20:31 2019
+ * Disassembly of DSDT.aml, Tue Dec  3 01:38:27 2019
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0003EB22 (256802)
+ *     Length           0x0003F2DC (258780)
  *     Revision         0x02
- *     Checksum         0x8C
+ *     Checksum         0x68
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x00000001 (1)
@@ -246,6 +243,7 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
     External (_SB_.PCI0.XHC_.RHUB.PS2X, MethodObj)    // 0 Arguments (from opcode)
     External (_SB_.PCI0.XHC_.RHUB.PS3X, MethodObj)    // 0 Arguments (from opcode)
     External (_SB_.PDTS, UnknownObj)    // (from opcode)
+    External (_SB_.PEPD.DEVY, PkgObj)    // (from opcode)
     External (_SB_.PKGA, UnknownObj)    // (from opcode)
     External (_SB_.PR00, DeviceObj)    // (from opcode)
     External (_SB_.PR00.LPSS, PkgObj)    // (from opcode)
@@ -340,12 +338,13 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
     External (TPDF, UnknownObj)    // (from opcode)
     External (TPLF, UnknownObj)    // (from opcode)
     External (WMIY, UnknownObj)    // (from opcode)
+    External (XBAS, UnknownObj)    // (from opcode)
 
     Name (SS1, Zero)
     Name (SS2, Zero)
     Name (SS3, One)
     Name (SS4, One)
-    OperationRegion (GNVS, SystemMemory, 0x7FC44018, 0x07E6)
+    OperationRegion (GNVS, SystemMemory, 0x89B44018, 0x07E6)
     Field (GNVS, AnyAcc, Lock, Preserve)
     {
         OSYS,   16, 
@@ -1451,7 +1450,7 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
         WLRP,   8
     }
 
-    OperationRegion (OGNS, SystemMemory, 0x7FC8EF98, 0x00000015)
+    OperationRegion (OGNS, SystemMemory, 0x89B8EF98, 0x00000015)
     Field (OGNS, AnyAcc, Lock, Preserve)
     {
         ECAF,   8, 
@@ -3871,7 +3870,7 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
 
     Name (BUFN, Zero)
     Name (MBUF, Buffer (0x1000){})
-    OperationRegion (MDBG, SystemMemory, 0x7FC2D018, 0x00001004)
+    OperationRegion (MDBG, SystemMemory, 0x89B2D018, 0x00001004)
     Field (MDBG, AnyAcc, Lock, Preserve)
     {
         MDG0,   32768
@@ -4200,7 +4199,7 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
         }
     }
 
-    Name (PNVB, 0x7FC8E298)
+    Name (PNVB, 0x89B8E298)
     Name (PNVL, 0x028F)
     OperationRegion (PNVA, SystemMemory, PNVB, PNVL)
     Field (PNVA, AnyAcc, Lock, Preserve)
@@ -18625,6 +18624,68 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
 
     Scope (_SB.PCI0)
     {
+        Method (DLLR, 5, Serialized)
+        {
+            ADBG ("SD DLL restore flow")
+            Name (TEMP, Zero)
+            Name (EMPB, Zero)
+            Store (XBAS, EMPB)
+            Or (EMPB, ShiftLeft (Arg0, 0x14), EMPB)
+            Or (EMPB, ShiftLeft (Arg1, 0x0F), EMPB)
+            Or (EMPB, ShiftLeft (Arg2, 0x0C), EMPB)
+            OperationRegion (EMPC, SystemMemory, EMPB, 0x0100)
+            Field (EMPC, DWordAcc, NoLock, Preserve)
+            {
+                Offset (0x04), 
+                    ,   1, 
+                MSE,    1, 
+                Offset (0x10), 
+                BAR0,   64, 
+                Offset (0x84), 
+                PSTA,   32
+            }
+
+            Name (OPST, Zero)
+            Store (PSTA, OPST)
+            And (PSTA, 0xFFFFFFFC, PSTA)
+            Store (PSTA, TEMP)
+            Name (OMSE, Zero)
+            Store (MSE, OMSE)
+            Store (Zero, MSE)
+            Name (OBAR, Zero)
+            Store (BAR0, OBAR)
+            Store (Arg3, BAR0)
+            Store (BAR0, TEMP)
+            Store (One, MSE)
+            OperationRegion (EMMI, SystemMemory, Arg3, Arg4)
+            Field (EMMI, DWordAcc, NoLock, Preserve)
+            {
+                Offset (0x834), 
+                FDLL,   8, 
+                Offset (0x840), 
+                ADLL,   8
+            }
+
+            Name (FDLV, Zero)
+            Name (ADLV, Zero)
+            Store (FDLL, FDLV)
+            Store (ADLL, ADLV)
+            ADBG (Concatenate ("Fixed DLL value ", ToHexString (FDLV)))
+            ADBG (Concatenate ("Auto DLL Value ", ToHexString (ADLV)))
+            If (LNotEqual (ADLV, Zero))
+            {
+                ADBG ("Auto tuning executed, restoring values")
+                Multiply (ADLV, 0x02, ADLV)
+                Store (ADLV, FDLL)
+            }
+
+            Store (Zero, MSE)
+            Store (OBAR, BAR0)
+            Store (OMSE, MSE)
+            Store (OPST, PSTA)
+            Store (PSTA, TEMP)
+        }
+
         Device (PUFS)
         {
             Name (_ADR, 0x00120005)  // _ADR: Address
@@ -18676,6 +18737,7 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
 
             Method (_PS3, 0, Serialized)  // _PS3: Power State 3
             {
+                DLLR (Zero, 0x1A, Zero, 0xFE0D0000, 0x00010000)
                 Store (One, PGEN)
                 Or (PSTA, 0x03, PSTA)
                 Store (PSTA, TEMP)
@@ -19584,8 +19646,8 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
     Name (ECUP, One)
     Mutex (EHLD, 0x00)
     Name (LDLY, 0x012C)
-    Name (TNVB, 0x7FC43000)
-    Name (TNVL, 0x0043)
+    Name (TNVB, 0x89B43000)
+    Name (TNVL, 0x0044)
     OperationRegion (BNVS, SystemMemory, TNVB, TNVL)
     Field (BNVS, AnyAcc, Lock, Preserve)
     {
@@ -19632,7 +19694,8 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
         TSXW,   8, 
         RTBT,   8, 
         RTBC,   8, 
-        TBCD,   16
+        TBCD,   16, 
+        TREV,   8
     }
 
     Name (TRDO, Zero)
@@ -21272,6 +21335,87 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
                 Return (Zero)
             }
         }
+    }
+
+    Method (STPC, 2, Serialized)
+    {
+        Name (DEVI, Zero)
+        Name (MENT, 0x02)
+        Store (Arg0, DEVI)
+        If (LGreater (Add (DEVI, MENT), Arg1))
+        {
+            Return (Zero)
+        }
+
+        Store (Zero, Local0)
+        If (LAnd (LGreater (RPS0, Zero), RPN0))
+        {
+            If (LEqual (RPT0, One))
+            {
+                If (LLess (RPS0, 0x0A))
+                {
+                    Store (Concatenate ("RP0", ToDecimalString (RPS0)), Local1)
+                    Store (One, Local0)
+                }
+                ElseIf (LLess (RPS0, 0x19))
+                {
+                    Store (Concatenate ("RP", ToDecimalString (RPS0)), Local1)
+                    Store (One, Local0)
+                }
+            }
+
+            If (LEqual (RPT0, 0x02))
+            {
+                If (LLess (RPS0, 0x03))
+                {
+                    Store (Concatenate ("PEG", ToDecimalString (RPS0)), Local1)
+                    Store (One, Local0)
+                }
+            }
+        }
+
+        If (LEqual (Local0, One))
+        {
+            Store (Concatenate ("\\_SB.PCI0.", Local1), Index (DerefOf (Index (\_SB.PEPD.DEVY, DEVI)), Zero))
+            Store (One, Index (DerefOf (Index (\_SB.PEPD.DEVY, DEVI)), One))
+            Increment (DEVI)
+        }
+
+        Store (Zero, Local0)
+        If (LAnd (LGreater (RPS1, Zero), RPN1))
+        {
+            If (LEqual (RPT1, One))
+            {
+                If (LLess (RPS1, 0x0A))
+                {
+                    Store (Concatenate ("RP0", ToDecimalString (RPS1)), Local1)
+                    Store (One, Local0)
+                }
+                ElseIf (LLess (RPS1, 0x19))
+                {
+                    Store (Concatenate ("RP", ToDecimalString (RPS1)), Local1)
+                    Store (One, Local0)
+                }
+            }
+
+            If (LEqual (RPT1, 0x02))
+            {
+                If (LLess (RPS1, 0x03))
+                {
+                    Store (Concatenate ("PEG", ToDecimalString (RPS1)), Local1)
+                    Store (One, Local0)
+                }
+            }
+        }
+
+        If (LEqual (Local0, One))
+        {
+            Store (Concatenate ("\\_SB.PCI0.", Local1), Index (DerefOf (Index (\_SB.PEPD.DEVY, DEVI)), Zero))
+            Store (One, Index (DerefOf (Index (\_SB.PEPD.DEVY, DEVI)), One))
+            Increment (DEVI)
+        }
+
+        Return (One)
     }
 
     Scope (\)
@@ -53432,16 +53576,6 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
                 Store ("=====PROJECT_QUERY_11=====", Debug)
                 If (IGDS)
                 {
-                    Store (^^^GFX0.CBLV, Local0)
-                    If (LEqual (And (Local0, 0x7F), One))
-                    {
-                        Store (One, BLLV)
-                    }
-                    Else
-                    {
-                        Store (Zero, BLLV)
-                    }
-
                     Notify (^^^GFX0.DD1F, 0x87)
                 }
                 Else
@@ -53587,7 +53721,18 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
                     {
                         If (QTMD)
                         {
-                            If (LGreaterEqual (EST1, 0x4B))
+                            If (LAnd (LEqual (^^^^GGIV (0x04000014), One), LEqual (^^^^GGIV (0x04000013), One)))
+                            {
+                                If (LGreaterEqual (EST1, 0x4E))
+                                {
+                                    Store (0x4E, GPST)
+                                }
+                                ElseIf (LLessEqual (EST1, 0x39))
+                                {
+                                    Store (0x5A, GPST)
+                                }
+                            }
+                            ElseIf (LGreaterEqual (EST1, 0x4B))
                             {
                                 Store (0x4E, GPST)
                             }
@@ -53598,11 +53743,34 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
                         }
                         ElseIf (STMD)
                         {
-                            If (LGreaterEqual (EST1, 0x43))
+                            If (LAnd (LEqual (^^^^GGIV (0x04000014), One), LEqual (^^^^GGIV (0x04000013), One)))
+                            {
+                                If (LGreaterEqual (EST1, 0x4E))
+                                {
+                                    Store (0x4E, GPST)
+                                }
+                                ElseIf (LLessEqual (EST1, 0x3B))
+                                {
+                                    Store (0x5A, GPST)
+                                }
+                            }
+                            ElseIf (LGreaterEqual (EST1, 0x43))
                             {
                                 Store (0x4E, GPST)
                             }
                             ElseIf (LLessEqual (EST1, 0x32))
+                            {
+                                Store (0x5A, GPST)
+                            }
+                        }
+                        ElseIf (LAnd (LEqual (^^^^GGIV (0x04000014), One), LEqual (^^^^GGIV (0x04000013), One)))
+                        {
+                            WXMS (0x20, 0xFC)
+                            If (LGreaterEqual (EST1, 0x4E))
+                            {
+                                Store (0x50, GPST)
+                            }
+                            ElseIf (LLessEqual (EST1, 0x3E))
                             {
                                 Store (0x5A, GPST)
                             }
@@ -53688,7 +53856,18 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
                     {
                         If (QTMD)
                         {
-                            If (LGreaterEqual (EST1, 0x4A))
+                            If (LAnd (LEqual (^^^^GGIV (0x04000014), One), LEqual (^^^^GGIV (0x04000013), One)))
+                            {
+                                If (LGreaterEqual (EST1, 0x4F))
+                                {
+                                    Store (0x4F, GPST)
+                                }
+                                ElseIf (LLessEqual (EST1, 0x3C))
+                                {
+                                    Store (0x5A, GPST)
+                                }
+                            }
+                            ElseIf (LGreaterEqual (EST1, 0x4A))
                             {
                                 Store (0x4F, GPST)
                             }
@@ -53699,11 +53878,33 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
                         }
                         ElseIf (STMD)
                         {
-                            If (LGreaterEqual (EST1, 0x48))
+                            If (LAnd (LEqual (^^^^GGIV (0x04000014), One), LEqual (^^^^GGIV (0x04000013), One)))
+                            {
+                                If (LGreaterEqual (EST1, 0x4D))
+                                {
+                                    Store (0x4F, GPST)
+                                }
+                                ElseIf (LLessEqual (EST1, 0x3C))
+                                {
+                                    Store (0x5A, GPST)
+                                }
+                            }
+                            ElseIf (LGreaterEqual (EST1, 0x48))
                             {
                                 Store (0x4F, GPST)
                             }
                             ElseIf (LLessEqual (EST1, 0x32))
+                            {
+                                Store (0x5A, GPST)
+                            }
+                        }
+                        ElseIf (LAnd (LEqual (^^^^GGIV (0x04000014), One), LEqual (^^^^GGIV (0x04000013), One)))
+                        {
+                            If (LGreaterEqual (EST1, 0x4E))
+                            {
+                                Store (0x51, GPST)
+                            }
+                            ElseIf (LLessEqual (EST1, 0x3F))
                             {
                                 Store (0x5A, GPST)
                             }
@@ -55023,7 +55224,18 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
                                     {
                                         If (LEqual (Local6, 0xE0))
                                         {
-                                            If (LGreaterEqual (EST1, 0x4B))
+                                            If (LAnd (LEqual (^^^^^GGIV (0x04000014), One), LEqual (^^^^^GGIV (0x04000013), One)))
+                                            {
+                                                If (LGreaterEqual (EST1, 0x4E))
+                                                {
+                                                    Store (0x3D, GPST)
+                                                }
+                                                ElseIf (LLessEqual (EST1, 0x39))
+                                                {
+                                                    Store (0x5A, GPST)
+                                                }
+                                            }
+                                            ElseIf (LGreaterEqual (EST1, 0x4B))
                                             {
                                                 Store (0x3D, GPST)
                                             }
@@ -55047,7 +55259,18 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
 
                                         If (LEqual (Local6, 0x08))
                                         {
-                                            If (LGreaterEqual (EST1, 0x4A))
+                                            If (LAnd (LEqual (^^^^^GGIV (0x04000014), One), LEqual (^^^^^GGIV (0x04000013), One)))
+                                            {
+                                                If (LGreaterEqual (EST1, 0x4F))
+                                                {
+                                                    Store (0x41, GPST)
+                                                }
+                                                ElseIf (LLessEqual (EST1, 0x3C))
+                                                {
+                                                    Store (0x5A, GPST)
+                                                }
+                                            }
+                                            ElseIf (LGreaterEqual (EST1, 0x4A))
                                             {
                                                 Store (0x41, GPST)
                                             }
@@ -55070,7 +55293,19 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
                                     {
                                         If (LEqual (Local6, 0xE0))
                                         {
-                                            If (LGreaterEqual (EST1, 0x44))
+                                            If (LAnd (LEqual (^^^^^GGIV (0x04000014), One), LEqual (^^^^^GGIV (0x04000013), One)))
+                                            {
+                                                WXMS (0x20, 0xFC)
+                                                If (LGreaterEqual (EST1, 0x4E))
+                                                {
+                                                    Store (0x46, GPST)
+                                                }
+                                                ElseIf (LLessEqual (EST1, 0x3E))
+                                                {
+                                                    Store (0x5A, GPST)
+                                                }
+                                            }
+                                            ElseIf (LGreaterEqual (EST1, 0x44))
                                             {
                                                 Store (0x46, GPST)
                                             }
@@ -55094,7 +55329,18 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
 
                                         If (LEqual (Local6, 0x08))
                                         {
-                                            If (LGreaterEqual (EST1, 0x49))
+                                            If (LAnd (LEqual (^^^^^GGIV (0x04000014), One), LEqual (^^^^^GGIV (0x04000013), One)))
+                                            {
+                                                If (LGreaterEqual (EST1, 0x4E))
+                                                {
+                                                    Store (0x49, GPST)
+                                                }
+                                                ElseIf (LLessEqual (EST1, 0x3F))
+                                                {
+                                                    Store (0x5A, GPST)
+                                                }
+                                            }
+                                            ElseIf (LGreaterEqual (EST1, 0x49))
                                             {
                                                 Store (0x49, GPST)
                                             }
@@ -55117,7 +55363,18 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
                                     {
                                         If (LEqual (Local6, 0xE0))
                                         {
-                                            If (LGreaterEqual (EST1, 0x4B))
+                                            If (LAnd (LEqual (^^^^^GGIV (0x04000014), One), LEqual (^^^^^GGIV (0x04000013), One)))
+                                            {
+                                                If (LGreaterEqual (EST1, 0x4E))
+                                                {
+                                                    Store (0x3D, GPST)
+                                                }
+                                                ElseIf (LLessEqual (EST1, 0x39))
+                                                {
+                                                    Store (0x5A, GPST)
+                                                }
+                                            }
+                                            ElseIf (LGreaterEqual (EST1, 0x4B))
                                             {
                                                 Store (0x3D, GPST)
                                             }
@@ -55141,7 +55398,18 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
 
                                         If (LEqual (Local6, 0x08))
                                         {
-                                            If (LGreaterEqual (EST1, 0x4A))
+                                            If (LAnd (LEqual (^^^^^GGIV (0x04000014), One), LEqual (^^^^^GGIV (0x04000013), One)))
+                                            {
+                                                If (LGreaterEqual (EST1, 0x4F))
+                                                {
+                                                    Store (0x41, GPST)
+                                                }
+                                                ElseIf (LLessEqual (EST1, 0x3C))
+                                                {
+                                                    Store (0x5A, GPST)
+                                                }
+                                            }
+                                            ElseIf (LGreaterEqual (EST1, 0x4A))
                                             {
                                                 Store (0x41, GPST)
                                             }
@@ -55174,7 +55442,18 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
                             {
                                 If (LEqual (Local6, 0xE0))
                                 {
-                                    If (LGreaterEqual (EST1, 0x43))
+                                    If (LAnd (LEqual (^^^^^GGIV (0x04000014), One), LEqual (^^^^^GGIV (0x04000013), One)))
+                                    {
+                                        If (LGreaterEqual (EST1, 0x4E))
+                                        {
+                                            Store (0x42, GPST)
+                                        }
+                                        ElseIf (LLessEqual (EST1, 0x3B))
+                                        {
+                                            Store (0x5A, GPST)
+                                        }
+                                    }
+                                    ElseIf (LGreaterEqual (EST1, 0x43))
                                     {
                                         Store (0x42, GPST)
                                     }
@@ -55198,7 +55477,18 @@ DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x00000001)
 
                                 If (LEqual (Local6, 0x08))
                                 {
-                                    If (LGreaterEqual (EST1, 0x48))
+                                    If (LAnd (LEqual (^^^^^GGIV (0x04000014), One), LEqual (^^^^^GGIV (0x04000013), One)))
+                                    {
+                                        If (LGreaterEqual (EST1, 0x4D))
+                                        {
+                                            Store (0x45, GPST)
+                                        }
+                                        ElseIf (LLessEqual (EST1, 0x3C))
+                                        {
+                                            Store (0x5A, GPST)
+                                        }
+                                    }
+                                    ElseIf (LGreaterEqual (EST1, 0x48))
                                     {
                                         Store (0x45, GPST)
                                     }
