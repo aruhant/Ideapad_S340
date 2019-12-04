@@ -39,6 +39,23 @@
 			<array>
 				<dict>
 					<key>Comment</key>
+					<string>change Method(_Q11,0,N) to XQ11</string>
+					<key>Find</key>
+					<data>X1ExMQA=</data>
+					<key>Replace</key>
+					<data>WFExMQA=</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change Method(_Q12,0,N) to XQ12</string>
+					<key>Find</key>
+					<data>X1ExMgA=</data>
+					<key>Replace</key>
+					<data>WFExMgA=</data>
+				</dict>
+
+				<dict>
+					<key>Comment</key>
 					<string>change OSID to XSID (to avoid match against _OSI XOSI patch)</string>
 					<key>Disabled</key>
 					<true/>
