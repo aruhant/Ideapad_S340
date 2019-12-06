@@ -29,6 +29,20 @@
 			<array>
 				<dict>
 					<key>Comment</key>
+					<string>Rename GPRW to XGPRW</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					R1BSVwI=
+					</data>
+					<key>Replace</key>
+					<data>
+					WFBSVwI=
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
 					<string>change Method(_Q11,0,N) to XQ11</string>
 					<key>Disabled</key>
 					<false/>
