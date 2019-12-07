@@ -282,7 +282,9 @@
 		<key>#DefaultVolume</key>
 		<string>LastBootedVolume</string>
 		<key>Arguments</key>
-		<string>dart=0  -disablegfxfirmware -cdfon -igfxnohdmi</string>
+		<string>dart=0 -disablegfxfirmware -cdfon -igfxnohdmi</string>
+		<key>DefaultVolume</key>
+		<string>LastBootedVolume</string>
 		<key>NeverHibernate</key>
 		<true/>
 		<key>Secure</key>
@@ -569,6 +571,7 @@
 		<key>Hide</key>
 		<array>
 			<string>Preboot</string>
+			<string>Recovery</string>
 		</array>
 		<key>Mouse</key>
 		<dict>
@@ -582,10 +585,12 @@
 			<key>Legacy</key>
 			<false/>
 			<key>Linux</key>
-			<true/>
+			<false/>
 			<key>Tool</key>
-			<true/>
+			<false/>
 		</dict>
+		<key>Theme</key>
+		<string>Outlines</string>
 	</dict>
 	<key>Graphics</key>
 	<dict>
