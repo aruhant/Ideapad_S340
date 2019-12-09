@@ -680,7 +680,7 @@
 				<key>Comment</key>
 				<string>plrp</string>
 				<key>Disabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>
 				g/sPDw==
@@ -698,7 +698,7 @@
 				<key>Comment</key>
 				<string>plrp 2</string>
 				<key>Disabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>
 				g/kPDw==
@@ -724,7 +724,7 @@
 	<key>SMBIOS</key>
 	<dict>
 		<key>ProductName</key>
-		<string>MacBookPro15,2</string>
+		<string>MacBookPro15,4</string>
 		<key>Trust</key>
 		<true/>
 	</dict>
