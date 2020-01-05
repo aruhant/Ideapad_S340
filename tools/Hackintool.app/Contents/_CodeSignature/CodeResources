@@ -22,15 +22,15 @@
 		</data>
 		<key>Resources/AppIcon.icns</key>
 		<data>
-		hfAi0+MRWUePqGDYY8e8IqZvC3Q=
+		DlvjNtkbt1ATU+p9SdMfaPn8Rj4=
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		bP+Vqhrrv865ltMsQgl7nvn5Ntk=
+		RUJY0HALQ9EO76P0QVTnR/l9UVI=
 		</data>
 		<key>Resources/Audio/Codecs.plist</key>
 		<data>
-		Vd2H2ZCTWhDW1GYCmAgutNO+xMc=
+		Ic7EgBFMbGxDvI/1TLOGE0D3U/Y=
 		</data>
 		<key>Resources/Audio/Controllers.plist</key>
 		<data>
@@ -58,11 +58,11 @@
 		</data>
 		<key>Resources/Base.lproj/Credits.rtf</key>
 		<data>
-		4Ok9K0rkSdhAJfJ7bKymUiF//0Y=
+		gNlnMn9T7qVBDjQOBs41TUQyix0=
 		</data>
 		<key>Resources/Base.lproj/MainMenu.nib</key>
 		<data>
-		BQipF9UIs115JxrgNnmwARvRHmc=
+		/rxe1bixCFaBSYOqgJnGFoK+sJg=
 		</data>
 		<key>Resources/Clover/config_patches.plist</key>
 		<data>
@@ -866,7 +866,7 @@
 		</data>
 		<key>Resources/Kexts/kexts.plist</key>
 		<data>
-		mDnuuSHKXHziMqPxhclAE5msHu8=
+		LexRqJnTmYgP+DVDN2g2Sg1M3Hw=
 		</data>
 		<key>Resources/OpenCore/config.plist</key>
 		<data>
@@ -874,7 +874,7 @@
 		</data>
 		<key>Resources/PCI/pci.ids</key>
 		<data>
-		RUpNdChkXOU2k8ucIfitobAoDMM=
+		cOxt9wif2cMO/sIH2DUn3HMhfcY=
 		</data>
 		<key>Resources/USB/config_patches.plist</key>
 		<data>
@@ -1037,33 +1037,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hfAi0+MRWUePqGDYY8e8IqZvC3Q=
+			DlvjNtkbt1ATU+p9SdMfaPn8Rj4=
 			</data>
 			<key>hash2</key>
 			<data>
-			jN91tZfWESp1we3cc2mNGQ6vbaBr4taHDhqHIVza8nc=
+			LAPEqWEAXq3+/u8li1MI02EHQ6yNwAjhqQ5EvwiHh2w=
 			</data>
 		</dict>
 		<key>Resources/Assets.car</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bP+Vqhrrv865ltMsQgl7nvn5Ntk=
+			RUJY0HALQ9EO76P0QVTnR/l9UVI=
 			</data>
 			<key>hash2</key>
 			<data>
-			b+B2KfunJBzR8a+ADo8Sdzt3dntCvp506Pten5eXZNU=
+			ypTHU9KoJdQMiAR1Cr3cMY8W+sMAAa6eSUK0nFHJLr0=
 			</data>
 		</dict>
 		<key>Resources/Audio/Codecs.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Vd2H2ZCTWhDW1GYCmAgutNO+xMc=
+			Ic7EgBFMbGxDvI/1TLOGE0D3U/Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			H7vNjpgNCYWRe45MjN4r5RS2lzjFo6AeSp5pCWEwEx0=
+			Pvt14QX1tq8tYLEs8B1OwEl0Dj8EGJf/db0wWZqBd+s=
 			</data>
 		</dict>
 		<key>Resources/Audio/Controllers.plist</key>
@@ -1136,22 +1136,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4Ok9K0rkSdhAJfJ7bKymUiF//0Y=
+			gNlnMn9T7qVBDjQOBs41TUQyix0=
 			</data>
 			<key>hash2</key>
 			<data>
-			Qxx37Bd9aMBNMKvl17/XOBn9eMyFgqJf/A4WCYW3Xmw=
+			EMJEbW2m1sXNzpjm4id/VJUWpYoSGSD0uXVr+xtyAwQ=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/MainMenu.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BQipF9UIs115JxrgNnmwARvRHmc=
+			/rxe1bixCFaBSYOqgJnGFoK+sJg=
 			</data>
 			<key>hash2</key>
 			<data>
-			1PVzD9rKVq8md0Nc4f5ukHfClI4Fu3gKVQvlmtFXLP4=
+			mrsBy7cUviap+cN94WTNF6QpvS4+wtjCKFQC1cYtbm8=
 			</data>
 		</dict>
 		<key>Resources/Clover/config_patches.plist</key>
@@ -3076,11 +3076,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			mDnuuSHKXHziMqPxhclAE5msHu8=
+			LexRqJnTmYgP+DVDN2g2Sg1M3Hw=
 			</data>
 			<key>hash2</key>
 			<data>
-			lMGxb7lQsBLY1Lq/JufGpAqT0H9wr/z1QDHDXyY1HXY=
+			D+yJwU8uFJCdBj1RpIExwQQdsPXOBqPIgG8Gty0sues=
 			</data>
 		</dict>
 		<key>Resources/OpenCore/config.plist</key>
@@ -3098,11 +3098,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RUpNdChkXOU2k8ucIfitobAoDMM=
+			cOxt9wif2cMO/sIH2DUn3HMhfcY=
 			</data>
 			<key>hash2</key>
 			<data>
-			84TxwbAyhZR3LDgjRWKI5OtoIfrbHX0d1wuaCwOUz3Q=
+			5KESPTtkc35Qh017HZc6tJtv4lTQKfgojjJTLBF0v0o=
 			</data>
 		</dict>
 		<key>Resources/USB/config_patches.plist</key>
