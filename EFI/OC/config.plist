@@ -1316,7 +1316,7 @@
         <key>HibernateMode</key>
         <string>None</string>
         <key>HideAuxiliary</key>
-        <false/>
+        <true/>
         <key>LauncherOption</key>
         <string>Full</string>
         <key>LauncherPath</key>
@@ -1328,7 +1328,7 @@
         <key>PickerMode</key>
         <string>External</string>
         <key>PickerVariant</key>
-        <string>Auto</string>
+        <string>Minimal</string>
         <key>PollAppleHotKeys</key>
         <false/>
         <key>ShowPicker</key>
@@ -1703,7 +1703,7 @@
           <key>csr-active-config</key>
           <data>5wMAAA==</data>
           <key>boot-args</key>
-          <string>alcid=11 vsmcgen=1 debug=0x100 darkwake=0 dart=0 keepsyms=1 -v</string>
+          <string>alcid=11 vsmcgen=1 debug=0x100 darkwake=0 dart=0 keepsyms=1 -v -igfxblr</string>
           <key>SystemAudioVolume</key>
           <data>UA==</data>
         </dict>
@@ -1837,6 +1837,12 @@
         <integer>1</integer>
         <key>GraphicsInputMirroring</key>
         <true/>
+        <key>PointerDwellClickTimeout</key>
+        <integer>0</integer>
+        <key>PointerDwellDoubleClickTimeout</key>
+        <integer>0</integer>
+        <key>PointerDwellRadius</key>
+        <integer>0</integer>
       </dict>
       <key>Audio</key>
       <dict>
