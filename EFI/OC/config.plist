@@ -1292,6 +1292,8 @@
         <false/>
         <key>ForceAquantiaEthernet</key>
         <false/>
+        <key>DisableIoMapperMapping</key>
+        <false/>
       </dict>
       <key>Scheme</key>
       <dict>
@@ -1337,6 +1339,8 @@
         <integer>750000</integer>
         <key>Timeout</key>
         <integer>5</integer>
+        <key>HibernateSkipsPicker</key>
+        <false/>
       </dict>
       <key>Debug</key>
       <dict>
@@ -1981,6 +1985,10 @@
         <integer>0</integer>
         <key>UgaPassThrough</key>
         <false/>
+        <key>GopBurstMode</key>
+        <false/>
+        <key>InitialMode</key>
+        <string>Auto</string>
       </dict>
       <key>ProtocolOverrides</key>
       <dict>
@@ -2020,6 +2028,8 @@
         <false/>
         <key>UnicodeCollation</key>
         <false/>
+        <key>PciIo</key>
+        <false/>
       </dict>
       <key>Quirks</key>
       <dict>
@@ -2050,6 +2060,8 @@
         <key>UnblockFsConnect</key>
         <false/>
         <key>ForceOcWriteFlash</key>
+        <false/>
+        <key>ResizeUsePciRbIo</key>
         <false/>
       </dict>
       <key>ReservedMemory</key>
